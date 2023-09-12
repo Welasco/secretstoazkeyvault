@@ -40,3 +40,23 @@ source ~/.bashrc
 go mod init github.com/Welasco/secretstoazkeyvault.git
 # The folder must be empty to execute this command
 kubebuilder init --domain vwslab.com --owner welasco
+
+# Create API
+# This command will create an API to watch a core resource type (resources created by default in the cluster like: Secrets, Pods, etc...)
+# It will ask if you want to create a Resource, we don't need because Secrets is already a wellknown resource in the cluster
+# The second ask will be create a controller, we need a controller since we want one to minitor all Secrets
+kubebuilder create api --group core --version v1 --kind Secret
+
+# Output:
+# victor@jumpbox:~/secretstoazkeyvault$ kubebuilder create api --group core --version v1 --kind Secret
+# INFO[0000] Create Resource [y/n]                        
+# n
+# INFO[0002] Create Controller [y/n]                      
+# y
+# INFO[0003] Writing kustomize manifests for you to edit... 
+# INFO[0003] Writing scaffold for you to edit...          
+# INFO[0003] internal/controller/suite_test.go            
+# INFO[0003] internal/controller/secret_controller.go     
+# INFO[0003] Update dependencies:
+# $ go mod tidy           
+
